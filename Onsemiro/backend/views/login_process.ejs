@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/style_login.css">
-  <link rel="stylesheet" ref="../css/jquery.fullPage.css" type="text/css"/>
+  <link rel="stylesheet" href="style_login.css">
   <link rel="shortcut icon" type="image/x-icon" href="../images/favicon.png">
   <!-- <script type="text/javascript" src="../js/jquery.fullPage.js"></script> -->
   <!-- <script type="text/javascript" src="../js/fullpage_control.js"></script> -->
@@ -17,7 +16,7 @@
       <!-- 상단 메뉴-->
       <ul>
         <!--로고-->
-        <li><img src="../images/logo.png" style="max-width: 80%; height: auto; margin-top:10%; margin-left:20%"></li>
+        <li><img src="logo.png" style="max-width: 80%; height: auto; margin-top:10%; margin-left:20%"></li>
         <li></li>
         <li></li>
         <li></li>
@@ -40,7 +39,7 @@
     <div class="content">
       <div class="login_box">
         <p>로그인</p>
-        <form>
+        <form action="/login_process" method="POST">
           <input type="email" name="email" class="login_input" placeholder="이메일 주소"><br>
           <input type="password" name="password" class="login_input" placeholder="비밀번호"><br>
           <button type="submit" name="login_btn" class="lobin_btn">로그인</button>
@@ -54,7 +53,7 @@
   </div>
   <div class="footer">
     <div class="footer_element">
-      <img src="../images/logo.png" style="max-width: 130px; height: auto;"><br>
+      <img src="logo.png" style="max-width: 130px; height: auto;"><br>
       ©2021 by Jiyoon Park and Sukmin Lee
     </div>
     <div class="footer_element">
