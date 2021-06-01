@@ -91,8 +91,7 @@ app.get('/signup', function(req, res) {
 app.post('/signup_success', function(req, res){
   var queryData = url.parse(req.url, true).query;
   return res.render('signup_success',{
-    name: String(queryData.name),
-    email: String(queryData.email)
+    
   });
 });
 
@@ -150,14 +149,54 @@ app.post('/login_process', function(req, res) {
 
 app.get('/login_success', function(req, res){
   var queryData = url.parse(req.url, true).query;
-  console.log(queryData.name);
   // cookie생성
-  res.cookie("email", "test@gmail.com");
+  res.cookie("email", queryData.email);
+  res.cookie("name", queryData.name);
   // cookie 읽기
   console.log(req.cookies);
   return res.render('login_success',{
     name: String(queryData.name),
     email: String(queryData.email)
+  });
+});
+
+// 마이페이지
+app.get('/mypage', function(req, res) {
+  let user_name = "";
+  let user_email = req.cookies['email'];
+  // 현재 로그인한 유저의 이름 정보 가져오기
+  User.findOne({email: user_email}, (err, data) => {
+    user_name = data.name;
+    res.render('my_page', {
+      name: user_name,
+      email: user_email
+    });
+  });
+});
+
+// 비밀번호 변경 페이지
+app.get('/change-password', function(req, res) {
+  return res.render('change_password', {
+  });
+});
+
+// 비밀번호 변경 페이지
+app.post('/change-password-process', function(req, res) {
+  let current_login_user = req.cookie['email']
+  User.findOne({email: current_login_user}, (err, data) => {
+    if(data.password == req.body.previous_pw){
+      User.update({email: current_login_user}, {password: req.body.new_pw}, (err, data) => {
+        if(err){
+          console.log(err);
+        }else{
+          alert("비밀번호 변경을 실패했습니다.");
+        }
+      });
+    }else{
+      alert("현재 비밀번호가 틀렸습니다. ");
+    }
+  })
+  return res.render('change_password', {
   });
 });
 
